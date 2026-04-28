@@ -341,8 +341,8 @@
       if (HIDDEN_ARTIST_PARTIALS.some(p => al.includes(p))) return false;
       // Hide all artists at hidden venues
       if (HIDDEN_VENUES.some(h => v.includes(h))) return false;
-      // Harmony patio times
-      if (v.includes('harmony') && HARMONY_HIDDEN_TIMES.includes(s.time)) return false;
+      // Harmony patio — hide 6-10PM slots on Friday and Saturday only
+      if (v.includes('harmony') && HARMONY_HIDDEN_TIMES.includes(s.time) && (s.day === 'jun12' || s.day === 'jun13')) return false;
       // W Hotel — hide karri and spin showcase
       if (v.includes('w hotel') && (al.includes('karri') || al.includes('spin') || s.artist.toLowerCase().includes('showcase'))) return false;
       // Hide anything with spin showcase in artist or venue name
