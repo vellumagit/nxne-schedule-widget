@@ -83,18 +83,20 @@
       --border-strong:rgba(232,228,192,0.28); --red-dim:rgba(217,79,43,0.15);
     }
     #nxne-widget .hero { padding:52px 40px 40px; border-bottom:1px solid rgba(232,228,192,0.13); }
-    #nxne-widget .hero-eye { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:33px; letter-spacing:4px; text-transform:uppercase; color:rgba(232,228,192,0.42); margin-bottom:12px; display:flex; align-items:center; gap:10px; }
+    #nxne-widget .hero-eye { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:26px; letter-spacing:4px; text-transform:uppercase; color:rgba(232,228,192,0.42); margin-bottom:12px; display:flex; align-items:center; gap:10px; }
     #nxne-widget .hero-eye::before { content:''; display:inline-block; width:24px; height:1px; background:#d94f2b; }
-    #nxne-widget .hero-title { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(56px,10vw,120px); line-height:0.88; text-transform:uppercase; letter-spacing:-1px; color:#e8e4c0; margin-bottom:20px; }
+    #nxne-widget .hero-title { font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:clamp(48px,8vw,100px); line-height:0.88; text-transform:uppercase; letter-spacing:-1px; color:#e8e4c0; margin-bottom:20px; }
     #nxne-widget .hero-title em { color:#d94f2b; font-style:normal; }
-    #nxne-widget .hero-sub { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:26px; letter-spacing:3px; text-transform:uppercase; color:rgba(232,228,192,0.42); border-top:1px solid rgba(232,228,192,0.13); padding-top:16px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+    #nxne-widget .hero-sub { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:20px; letter-spacing:3px; text-transform:uppercase; color:rgba(232,228,192,0.42); border-top:1px solid rgba(232,228,192,0.13); padding-top:16px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
     #nxne-widget .hero-sub span::after { content:'|'; margin-left:16px; opacity:0.3; }
     #nxne-widget .hero-sub span:last-child::after { display:none; }
     #nxne-widget .live-bar { display:flex; align-items:center; gap:8px; padding:14px 40px; background:rgba(217,79,43,0.15); border-bottom:1px solid rgba(217,79,43,0.25); font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:24px; letter-spacing:2px; text-transform:uppercase; color:#e8e4c0; }
     #nxne-widget .live-dot { width:7px; height:7px; border-radius:50%; background:#d94f2b; animation:nxne-pulse 2s ease-in-out infinite; flex-shrink:0; }
     @keyframes nxne-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.6)} }
     #nxne-widget .how-to { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 40px; background:rgba(232,228,192,0.05); border-bottom:2px solid rgba(232,228,192,0.28); flex-wrap:wrap; }
-    #nxne-widget .how-to-text { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:32px; letter-spacing:1px; color:rgba(232,228,192,0.42); line-height:1.6; }
+    #nxne-widget .hero-announce { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:16px; letter-spacing:2px; text-transform:uppercase; color:#d94f2b; margin-top:14px; }
+    #nxne-widget .how-to-text { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:22px; letter-spacing:1px; color:rgba(232,228,192,0.42); line-height:1.5; }
+    #nxne-widget .how-to-line1 { margin-bottom:4px; font-size:24px; }
     #nxne-widget .how-to-text strong { color:#e8e4c0; font-weight:900; }
     #nxne-widget .reset-btn { background:#d94f2b; border:none; color:#e8e4c0; font-family:'Barlow Condensed',sans-serif; font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:9px 20px; cursor:pointer; }
     #nxne-widget .search-wrap { padding:20px 40px 0; }
@@ -155,6 +157,9 @@
       /* HERO — compact, no wrapping */
       #nxne-widget .hero { padding:20px 20px 16px; }
       #nxne-widget .hero-eye { font-size:10px; letter-spacing:1.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      #nxne-widget .hero-announce { font-size:12px; margin-top:10px; }
+      #nxne-widget .how-to-line1 { font-size:16px; }
+      #nxne-widget .how-to-text { font-size:14px; }
       #nxne-widget .hero-title { font-size:clamp(36px,12vw,52px); margin-bottom:10px; line-height:0.9; }
       #nxne-widget .hero-sub { font-size:11px; letter-spacing:1px; gap:0; padding-top:10px; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; white-space:nowrap; }
       #nxne-widget .hero-sub::-webkit-scrollbar { display:none; }
@@ -254,10 +259,14 @@
         <div class="hero-sub">
           <span>June 10 – 14</span><span>Toronto, Ontario</span><span>300+ Artists</span><span>30+ Venues</span>
         </div>
+        <div class="hero-announce">Full list of announced artists — more to come!</div>
       </div>
       <div class="live-bar"><span class="live-dot"></span>Live schedule &nbsp;·&nbsp; Last sync: <span id="nxne-sync">—</span></div>
       <div class="how-to">
-        <div class="how-to-text"><strong>Search</strong> by artist, venue or genre &nbsp;·&nbsp; <strong>Filter by day</strong> using the tabs &nbsp;·&nbsp; <strong>Filter by genre</strong> using the dropdown &nbsp;·&nbsp; <strong>Pick a venue</strong> from the sidebar</div>
+        <div class="how-to-text">
+          <div class="how-to-line1"><strong>Search</strong> by artist, venue or genre</div>
+          <div class="how-to-line2"><strong>Filter by day</strong> using the tabs &nbsp;·&nbsp; <strong>Filter by genre</strong> using the dropdown &nbsp;·&nbsp; <strong>Pick a venue</strong> from the sidebar</div>
+        </div>
         <button class="reset-btn" onclick="nxneWidget.clearAll()">↺ Reset</button>
       </div>
       <div class="search-wrap">
