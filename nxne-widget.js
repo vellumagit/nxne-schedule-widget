@@ -94,7 +94,7 @@
     #nxne-widget .live-dot { width:7px; height:7px; border-radius:50%; background:#d94f2b; animation:nxne-pulse 2s ease-in-out infinite; flex-shrink:0; }
     @keyframes nxne-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.6)} }
     #nxne-widget .how-to { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 40px; background:rgba(232,228,192,0.05); border-bottom:2px solid rgba(232,228,192,0.28); flex-wrap:wrap; }
-    #nxne-widget .hero-announce { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:16px; letter-spacing:1px; color:#d94f2b; margin-top:14px; }
+    #nxne-widget .hero-announce { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:32px; letter-spacing:1px; color:#d94f2b; margin-top:14px; }
     #nxne-widget .how-to-text { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:22px; letter-spacing:1px; color:rgba(232,228,192,0.42); line-height:1.5; }
     #nxne-widget .how-to-line1 { margin-bottom:4px; font-size:24px; }
     #nxne-widget .how-to-text strong { color:#e8e4c0; font-weight:900; }
