@@ -41,9 +41,6 @@
   // Venue name partials — hide ALL artists at these venues
   const HIDDEN_VENUES = ['horseshoe'];
 
-  // Hide specific venue + time combos
-  const HARMONY_HIDDEN_TIMES = ['6:00 PM','7:00 PM','8:00 PM','9:00 PM','10:00 PM'];
-
   // ─── GENRES ───────────────────────────────────
   const APPROVED_GENRES = ['Afro','Alternative Rock','Blues','Country','Disco','Electronic','Folk','Funk','Heavy Rock','Hip-hop','Indie Folk','Indie Pop','Indie Rock','Jazz','Metal','Pop','Punk','R&B','Rap','Reggae','Rock','Shoegaze','Soul'];
   const GENRE_MAP = {'afro':'Afro','afro-soul':'Afro','afrobeats':'Afro','afrobeats/ afro-fusion':'Afro','afrobeat/ arabesque/ cumbia':'Afro','alternative rock':'Alternative Rock','alternative hip hop':'Hip-hop','alternative r&b':'R&B','art-rock':'Alternative Rock','blues':'Blues','country':'Country','americana':'Country','disco':'Disco','electronic':'Electronic','uk garage':'Electronic','trap':'Electronic','dubstep':'Electronic','bass house':'Electronic','folk':'Folk','indie-folk':'Indie Folk','indie folk':'Indie Folk','singer/songwriter':'Folk','spoken word':'Folk','funk':'Funk','heavy rock':'Heavy Rock','heavy alternative rock':'Heavy Rock','hip-hop':'Hip-hop','hip hop':'Hip-hop','rap':'Rap','alternative rap':'Rap','pop-rap':'Rap','indie pop':'Indie Pop','dream pop':'Indie Pop','synth pop':'Indie Pop','power pop':'Indie Pop','pop punk':'Punk','indie rock':'Indie Rock','math rock':'Indie Rock','garage rock':'Rock','retro rock':'Rock','jazz':'Jazz','neo-soul meets neo-jazz with hints of r&b':'Jazz','metal':'Metal','alternative metal':'Metal','horror metal':'Metal','metalcore':'Metal','post hardcore / metalcore / screamo':'Metal','pop':'Pop','latin urban':'Pop','reggaeton':'Reggae','punk':'Punk','noise-punk':'Punk','post-punk':'Punk','post hardcore':'Punk','post-hardcore':'Punk','hardcore':'Punk','r&b':'R&B','neo soul':'R&B','neo-soul':'R&B','reggae':'Reggae','island fusion':'Reggae','rock':'Rock','shoegaze':'Shoegaze','dream pop/shoegaze':'Shoegaze','soul':'Soul','noise rock':'Heavy Rock','noise':'Heavy Rock','harmony-driven':'Folk','farsi':null,'roots/ soul/ rock/ pop':'Rock'};
@@ -341,8 +338,6 @@
       if (HIDDEN_ARTIST_PARTIALS.some(p => al.includes(p))) return false;
       // Hide all artists at hidden venues
       if (HIDDEN_VENUES.some(h => v.includes(h))) return false;
-      // Harmony patio — hide 6-10PM slots on Friday and Saturday only
-      if (v.includes('harmony') && HARMONY_HIDDEN_TIMES.includes(s.time) && (s.day === 'jun12' || s.day === 'jun13')) return false;
       // W Hotel — hide karri and spin showcase
       if (v.includes('w hotel') && (al.includes('karri') || al.includes('spin') || s.artist.toLowerCase().includes('showcase'))) return false;
       // Hide anything with spin showcase in artist or venue name
