@@ -10,6 +10,8 @@
   const HIDDEN_ARTISTS = [
     // MGK — top secret
     'mgk','machine gun kelly','billboard live - mgk','mgk?',
+    // Loviet — not yet announced
+    'loviet','loviet?',
     // bbno$
     'billboard the stage - bbno$ (direct)','billboard the stage - bbno$','bbno$',
     // MICO
@@ -36,6 +38,7 @@
     'mico','turnstile','james blake','dirty nil','the trews','julia wolf',
     'terra lightfoot','big wreck','brock mattsson','karri','spin showcase',
     'mgk','machine gun kelly',
+    'loviet',
   ];
 
   // Venue name partials — hide ALL artists at these venues
