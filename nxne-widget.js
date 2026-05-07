@@ -42,7 +42,7 @@
   ];
 
   // Venue name partials — hide ALL artists at these venues
-  const HIDDEN_VENUES = ['horseshoe','union station','billy bishop','redwood theatre'];
+  const HIDDEN_VENUES = ['union station','billy bishop','redwood theatre'];
 
   // ─── GENRES ───────────────────────────────────
   const APPROVED_GENRES = ['Afro','Alternative Rock','Blues','Country','Disco','Electronic','Folk','Funk','Heavy Rock','Hip-hop','Indie Folk','Indie Pop','Indie Rock','Jazz','Metal','Pop','Punk','R&B','Rap','Reggae','Rock','Shoegaze','Soul'];
