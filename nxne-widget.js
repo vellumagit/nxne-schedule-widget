@@ -350,6 +350,8 @@
       if (HIDDEN_ARTIST_PARTIALS.some(p => al.includes(p))) return false;
       // Hide all artists at hidden venues
       if (HIDDEN_VENUES.some(h => v.includes(h))) return false;
+      // Horseshoe — hide Saturday (still confirming acts)
+      if (v.includes('horseshoe') && s.day === 'jun13') return false;
       // W Hotel — hide karri and spin showcase
       if (v.includes('w hotel') && (al.includes('karri') || al.includes('spin') || s.artist.toLowerCase().includes('showcase'))) return false;
       // Hide anything with spin showcase in artist or venue name
