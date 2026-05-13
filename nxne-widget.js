@@ -9,13 +9,13 @@
   // Exact artist name matches (case-insensitive)
   const HIDDEN_ARTISTS = [
     // MGK — top secret
-    'mgk','machine gun kelly','billboard live - mgk','mgk?',
+    'mgk','machine gun kelly','billboard canada live - mgk','billboard live - mgk','mgk?',
     // Loviet — not yet announced
     'loviet','loviet?',
     // bbno$
-    'billboard the stage - bbno$ (direct)','billboard the stage - bbno$','bbno$',
+    'billboard canada the stage - bbno$','billboard the stage - bbno$ (direct)','billboard the stage - bbno$','bbno$',
     // MICO
-    'billboard live - mico','mico','mico?',
+    'billboard canada live - mico','billboard live - mico','mico','mico?',
     // Josh/Joss Ross
     'rolling stone future of music - joss ross','rolling stone future of music - josh ross',
     'rolling stone future of music - joss ross? (direct)','joss ross','josh ross',
@@ -30,7 +30,7 @@
     // Sneaky Dee's
     'dirty nil','dirty nil?',
     // W Hotel / Karri
-    'karri','billboard live - karri','billboard live - karri (direct)',
+    'karri','billboard canada live - karri','billboard live - karri','billboard live - karri (direct)',
   ];
 
   // Partial artist name matches — catches any variant containing these strings
