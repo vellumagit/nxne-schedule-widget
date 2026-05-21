@@ -147,6 +147,12 @@
     #nxne-widget .slot-time { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:17px; color:rgba(11,11,7,0.45); text-transform:uppercase; }
     #nxne-widget .slot-artist { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:23px; text-transform:uppercase; color:#000; }
     #nxne-widget .slot-meta { font-family:'Barlow',sans-serif; font-size:14px; color:rgba(11,11,7,0.5); margin-top:3px; }
+    #nxne-widget .slot-tag {
+      display:inline-block; margin-top:6px;
+      font-family:'Barlow Condensed',sans-serif; font-weight:700;
+      font-size:10px; letter-spacing:1.5px; text-transform:uppercase;
+      color:#d94f2b; border:1px solid #d94f2b; padding:2px 8px;
+    }
     #nxne-widget .slot-actions { display:flex; gap:6px; flex-shrink:0; }
     #nxne-widget .slot-btn { display:inline-flex; align-items:center; gap:5px; padding:5px 12px; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none; border:1px solid; cursor:pointer; white-space:nowrap; }
     #nxne-widget .btn-artist { background:#000; border-color:#000; color:#e8e4c0; }
@@ -386,7 +392,7 @@
 
   function getFiltered() {
     const q=state.q.toLowerCase().trim();
-    if(q) return SCHEDULE.filter(s=>[s.artist,s.venue,...s.genres].join(' ').toLowerCase().includes(q));
+    if(q) return SCHEDULE.filter(s=>[s.artist,s.venue,s.tag,...s.genres].join(' ').toLowerCase().includes(q));
     return SCHEDULE.filter(s=>{
       if(state.day!=='all'&&s.day!==state.day) return false;
       if(state.venue!=='all'&&s.venueKey!==state.venue) return false;
@@ -411,9 +417,10 @@
       html+=`<div class="day-section"><div class="day-label"><span class="day-name">${label}</span><span class="day-date">${date}</span></div><div>`;
       slots.sort((a,b)=>a.timeNum!==b.timeNum?a.timeNum-b.timeNum:a.artist.localeCompare(b.artist)).forEach((s,i)=>{
         const aSlug=artistSlug(s.artist), vSafe=s.venue.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+        const tagHtml = s.tag ? `<div class="slot-tag">${hl(s.tag,q)}</div>` : '';
         html+=`<div class="slot" style="animation-delay:${i*0.02}s">
           <span class="slot-time">${s.time}</span>
-          <div><div class="slot-artist">${hl(s.artist,q)}</div><div class="slot-meta">${hl(s.venue,q)}</div></div>
+          <div><div class="slot-artist">${hl(s.artist,q)}</div><div class="slot-meta">${hl(s.venue,q)}</div>${tagHtml}</div>
           <div class="slot-actions">
             <a class="slot-btn btn-artist" href="${ARTIST_URL}${aSlug}" target="_blank">♪ Artist</a>
             <button class="slot-btn btn-map" onclick="nxneWidget.openMap('${vSafe}')">● Map</button>
