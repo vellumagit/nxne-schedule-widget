@@ -443,8 +443,20 @@
     clearAll(){ state={q:'',day:'all',venue:'all',genres:[]}; document.getElementById('nxne-search').value=''; document.querySelectorAll('#nxne-widget .day-tab').forEach(b=>b.classList.remove('active')); document.querySelector('#nxne-widget [data-day="all"]').classList.add('active'); buildSidebar(); buildGenrePills(); render(); },
     openMap(venueName){
       document.getElementById('nxne-map-name').textContent=venueName;
-      // Venue-specific embed — centers on that exact location
-      const q = encodeURIComponent(venueName + ' Toronto ON');
+      // Per-venue address overrides — used when the venue name alone returns
+      // the wrong place on Google Maps. Keys are lowercased substrings of the
+      // venue name as it appears in the sheet; values are exact addresses.
+      // Lookup is exact-match first, then substring; display label is unchanged.
+      const VENUE_MAP_OVERRIDES = {
+        'soundstage': '90 Bloor St E, Toronto, ON M4W 1A7',  // Soundstage @ W Hotel
+      };
+      const lower = venueName.toLowerCase().trim();
+      let address = VENUE_MAP_OVERRIDES[lower];
+      if (!address) {
+        const key = Object.keys(VENUE_MAP_OVERRIDES).find(k => lower.includes(k));
+        address = key ? VENUE_MAP_OVERRIDES[key] : (venueName + ' Toronto ON');
+      }
+      const q = encodeURIComponent(address);
       document.getElementById('nxne-map-frame').src='https://maps.google.com/maps?q='+q+'&output=embed&z=16';
       document.getElementById('nxne-map-gmaps').href='https://www.google.com/maps/search/'+q;
       document.getElementById('nxne-map-panel').classList.add('open');
