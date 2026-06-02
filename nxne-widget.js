@@ -29,14 +29,13 @@
     'terra lightfoot','the trews','the trews?','julia wolf','julia wolf?',
     // Sneaky Dee's
     'dirty nil','dirty nil?',
-    // W Hotel / Karri
-    'karri','billboard canada live - karri','billboard live - karri','billboard live - karri (direct)',
+    // (Karri unhidden — Friday Soundstage / W Hotel Billboard show is announced)
   ];
 
   // Partial artist name matches — catches any variant containing these strings
   const HIDDEN_ARTIST_PARTIALS = [
     'mico','turnstile','james blake','dirty nil','the trews','julia wolf',
-    'terra lightfoot','big wreck','brock mattsson','karri','spin showcase',
+    'terra lightfoot','big wreck','brock mattsson','spin showcase',
     'mgk','machine gun kelly',
     'loviet',
   ];
@@ -356,8 +355,8 @@
       if (HIDDEN_ARTIST_PARTIALS.some(p => al.includes(p))) return false;
       // Hide all artists at hidden venues
       if (HIDDEN_VENUES.some(h => v.includes(h))) return false;
-      // W Hotel — hide karri and spin showcase
-      if (v.includes('w hotel') && (al.includes('karri') || al.includes('spin') || s.artist.toLowerCase().includes('showcase'))) return false;
+      // W Hotel — hide spin showcase / generic "showcase" line (KARRI now visible)
+      if (v.includes('w hotel') && (al.includes('spin') || s.artist.toLowerCase().includes('showcase'))) return false;
       // Hide anything with spin showcase in artist or venue name
       if (al.includes('spin') && al.includes('showcase')) return false;
       if (v.includes('spin') && v.includes('showcase')) return false;
