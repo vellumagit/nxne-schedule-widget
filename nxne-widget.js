@@ -10,34 +10,15 @@
   const HIDDEN_ARTISTS = [
     // MGK — top secret
     'mgk','machine gun kelly','billboard canada live - mgk','billboard live - mgk','mgk?',
-    // Loviet — not yet announced
-    'loviet','loviet?',
-    // bbno$
+    // bbno$ — top secret
     'billboard canada the stage - bbno$','billboard the stage - bbno$ (direct)','billboard the stage - bbno$','bbno$',
-    // MICO
-    'billboard canada live - mico','billboard live - mico','mico','mico?',
-    // Josh/Joss Ross
-    'rolling stone future of music - joss ross','rolling stone future of music - josh ross',
-    'rolling stone future of music - joss ross? (direct)','joss ross','josh ross',
-    // Lee's Palace
-    'turnstile','james blake',
-    // Cameron House
-    'brock mattsson',
-    // Garrison
-    'big wreck','big wreck?',
-    // Rivoli
-    'terra lightfoot','the trews','the trews?','julia wolf','julia wolf?',
-    // Sneaky Dee's
-    'dirty nil','dirty nil?',
-    // (Karri unhidden — Friday Soundstage / W Hotel Billboard show is announced)
   ];
 
-  // Partial artist name matches — catches any variant containing these strings
+  // Partial artist name matches — catches any variant containing these strings.
+  // 'spin showcase' kept as a generic block; bbno$ + mgk variants survive here too
+  // so a multi-artist comma-separated line containing them still gets hidden.
   const HIDDEN_ARTIST_PARTIALS = [
-    'mico','turnstile','james blake','dirty nil','the trews','julia wolf',
-    'terra lightfoot','big wreck','brock mattsson','spin showcase',
-    'mgk','machine gun kelly',
-    'loviet',
+    'bbno$','mgk','machine gun kelly','spin showcase',
   ];
 
   // Venue name partials — hide ALL artists at these venues
