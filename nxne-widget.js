@@ -13,10 +13,62 @@
   ];
 
   // Partial artist name matches — catches any variant containing these strings.
-  // 'spin showcase' kept as a generic block.
+  // 'spin showcase' kept as a generic block. 'major announce' hides placeholder
+  // cells from the sheet (e.g. "Major announce coming") so the hardcoded show
+  // for that slot can take its place without duplicates.
   const HIDDEN_ARTIST_PARTIALS = [
-    'mgk','machine gun kelly','spin showcase',
+    'mgk','machine gun kelly','spin showcase','major announce',
   ];
+
+  // ─── HARDCODED SHOWS ──────────────────────────
+  // Add shows that aren't in the EVENTS CALENDAR / VENUE SCHEDULE sheet yet.
+  // Each entry follows the same shape as a row in `data.artists` (raw proxy
+  // schema): name / venue / date ("Jun 12") / time ("8:00 PM") / tag / genres.
+  // Merged AFTER the hide filter, with a (day|artist|venue) dedup so if the
+  // same show later appears in the sheet, only the sheet version renders.
+  const HARDCODED_SHOWS = [
+    {
+      name: 'Jessie Reyez',
+      venue: 'Stackt Market',
+      date: 'Jun 11',
+      time: '12:00 PM',
+      tag: 'ROLLING STONE PRESENTS',
+      genres: 'R&B',
+    },
+    {
+      name: 'Dan + Shay',
+      venue: 'Opera House',
+      date: 'Jun 14',
+      time: '8:00 PM',
+      tag: 'BILLBOARD CANADA THE STAGE',
+      genres: 'Country',
+    },
+    {
+      name: 'NEMAHSIS',
+      venue: 'SOUNDSTAGE - W Toronto',
+      date: 'Jun 14',
+      time: '8:00 PM',
+      tag: 'SPIN CANADA SHOWCASE',
+      genres: 'Pop',
+    },
+  ];
+
+  function buildHardcodedRow(h) {
+    const dk = dayKey(h.date);
+    const genres = [...new Set((h.genres||'').split(',').map(g=>g.trim()).filter(Boolean).map(normalizeGenre).filter(Boolean))];
+    return {
+      day: dk,
+      dayLabel: dayLabel(dk),
+      dayDate: (h.date||'').replace('Jun ','June '),
+      time: h.time || 'TBA',
+      timeNum: timeToNum(h.time),
+      artist: h.name,
+      venue: h.venue,
+      venueKey: slugify(h.venue),
+      genres,
+      tag: h.tag || '',
+    };
+  }
 
   // ─── PER-ROW OVERRIDES ─────────────────────────
   // Transform specific artist/venue/day combos before filtering+rendering.
@@ -385,6 +437,17 @@
       if (al.includes('spin') && al.includes('showcase')) return false;
       if (v.includes('spin') && v.includes('showcase')) return false;
       return true;
+    });
+    // Merge hardcoded shows with sheet-derived schedule. Dedup key uses
+    // day|artist-lowercase|venueKey so if the same show later appears in the
+    // sheet, only the sheet version renders (hardcoded one is suppressed).
+    const existing = new Set(SCHEDULE.map(s => s.day + '|' + (s.artist||'').toLowerCase() + '|' + s.venueKey));
+    HARDCODED_SHOWS.forEach(h => {
+      const row = buildHardcodedRow(h);
+      const key = row.day + '|' + row.artist.toLowerCase() + '|' + row.venueKey;
+      if (existing.has(key)) return;
+      SCHEDULE.push(row);
+      existing.add(key);
     });
     const seen=new Map();
     SCHEDULE.forEach(s=>{ if(s.venue&&!seen.has(s.venueKey)) seen.set(s.venueKey,s.venue); });
