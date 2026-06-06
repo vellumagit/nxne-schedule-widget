@@ -8,18 +8,61 @@
   // ─── HIDDEN ───────────────────────────────────
   // Exact artist name matches (case-insensitive)
   const HIDDEN_ARTISTS = [
-    // MGK — top secret
+    // MGK — top secret (bbno$ now announced and visible)
     'mgk','machine gun kelly','billboard canada live - mgk','billboard live - mgk','mgk?',
-    // bbno$ — top secret
-    'billboard canada the stage - bbno$','billboard the stage - bbno$ (direct)','billboard the stage - bbno$','bbno$',
   ];
 
   // Partial artist name matches — catches any variant containing these strings.
-  // 'spin showcase' kept as a generic block; bbno$ + mgk variants survive here too
-  // so a multi-artist comma-separated line containing them still gets hidden.
+  // 'spin showcase' kept as a generic block.
   const HIDDEN_ARTIST_PARTIALS = [
-    'bbno$','mgk','machine gun kelly','spin showcase',
+    'mgk','machine gun kelly','spin showcase',
   ];
+
+  // ─── PER-ROW OVERRIDES ─────────────────────────
+  // Transform specific artist/venue/day combos before filtering+rendering.
+  // Use when the sheet data is right operationally but needs cosmetic tweaks
+  // (artist removed from multi-artist line, time bumped, showcase tag renamed).
+  // Match criteria are AND'd; missing criteria are ignored. The `set` block
+  // is shallow-merged into the schedule row. If `time` changes, timeNum is
+  // recomputed automatically so sort order stays correct.
+  const ARTIST_OVERRIDES = [
+    // KARRI removed from Friday Soundstage lineup, showcase renamed to R&B LIVE (per AMG)
+    {
+      match: { day: 'jun12', venueIncludes: 'soundstage', artistIncludes: 'karri' },
+      set: {
+        artist: 'Avenoir, Luna Elle, 646Y F4T',
+        tag: 'BILLBOARD R&B LIVE',
+      }
+    },
+    // Frank Walker — Thursday Soundstage time bumped from 8 PM → 10 PM (Q&A start) per AMG
+    {
+      match: { day: 'jun11', venueIncludes: 'soundstage', artistIncludes: 'frank walker' },
+      set: {
+        time: '10:00 PM',
+      }
+    },
+    // Nemahsis — Sunday Soundstage showcase tag clarified to SPIN CANADA SHOWCASE (per AMG)
+    {
+      match: { day: 'jun14', venueIncludes: 'soundstage', artistIncludes: 'nemahsis' },
+      set: {
+        tag: 'SPIN CANADA SHOWCASE',
+      }
+    },
+  ];
+
+  function applyArtistOverrides(s) {
+    const al = (s.artist||'').toLowerCase();
+    const vl = (s.venue||'').toLowerCase();
+    for (const rule of ARTIST_OVERRIDES) {
+      const m = rule.match || {};
+      if (m.day && s.day !== m.day) continue;
+      if (m.venueIncludes && !vl.includes(m.venueIncludes)) continue;
+      if (m.artistIncludes && !al.includes(m.artistIncludes)) continue;
+      Object.assign(s, rule.set);
+      if (rule.set.time !== undefined) s.timeNum = timeToNum(rule.set.time);
+    }
+    return s;
+  }
 
   // Venue name partials — hide ALL artists at these venues
   const HIDDEN_VENUES = ['union station','billy bishop','nathan phillips square'];
@@ -327,7 +370,7 @@
       const dk=dayKey(a.date);
       const genres=[...new Set((a.genres||'').split(',').map(g=>g.trim()).filter(Boolean).map(normalizeGenre).filter(Boolean))];
       return { day:dk, dayLabel:dayLabel(dk), dayDate:(a.date||'').replace('Jun ','June '), time:a.time||'TBA', timeNum:timeToNum(a.time), artist:(a.name||'').split('\n')[0].trim(), venue:a.venue||'', venueKey:slugify(a.venue), genres, tag:a.tag||'' };
-    }).filter(s => {
+    }).map(applyArtistOverrides).filter(s => {
       const al = s.artist.toLowerCase();
       const v  = s.venue.toLowerCase();
       // Exact artist match
