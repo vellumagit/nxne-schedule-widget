@@ -6,18 +6,16 @@
   const MAPS_URL   = 'https://www.google.com/maps/d/embed?mid=12BzW8UyWMSzRxecnzOHiRROUgrjYBgg';
 
   // ─── HIDDEN ───────────────────────────────────
-  // Exact artist name matches (case-insensitive)
-  const HIDDEN_ARTISTS = [
-    // MGK — top secret (bbno$ now announced and visible)
-    'mgk','machine gun kelly','billboard canada live - mgk','billboard live - mgk','mgk?',
-  ];
+  // Exact artist name matches (case-insensitive). MGK and bbno$ both
+  // announced and visible — empty for now. Add entries to re-hide.
+  const HIDDEN_ARTISTS = [];
 
   // Partial artist name matches — catches any variant containing these strings.
   // 'spin showcase' kept as a generic block. 'major announce' hides placeholder
   // cells from the sheet (e.g. "Major announce coming") so the hardcoded show
   // for that slot can take its place without duplicates.
   const HIDDEN_ARTIST_PARTIALS = [
-    'mgk','machine gun kelly','spin showcase','major announce',
+    'spin showcase','major announce',
   ];
 
   // ─── HARDCODED SHOWS ──────────────────────────
