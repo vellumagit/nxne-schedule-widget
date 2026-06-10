@@ -15,7 +15,7 @@
   // cells from the sheet (e.g. "Major announce coming") so the hardcoded show
   // for that slot can take its place without duplicates.
   const HIDDEN_ARTIST_PARTIALS = [
-    'spin showcase','major announce',
+    'spin showcase','major announce','jessie reyez','jessie reyes',
   ];
 
   // ─── HARDCODED SHOWS ──────────────────────────
@@ -25,14 +25,7 @@
   // Merged AFTER the hide filter, with a (day|artist|venue) dedup so if the
   // same show later appears in the sheet, only the sheet version renders.
   const HARDCODED_SHOWS = [
-    {
-      name: 'Jessie Reyez',
-      venue: 'Stackt Market',
-      date: 'Jun 11',
-      time: '12:00 PM',
-      tag: 'ROLLING STONE PRESENTS',
-      genres: 'R&B',
-    },
+    // Jessie Reyez removed — pulled per request
     {
       name: 'Dan + Shay',
       venue: 'Opera House',
