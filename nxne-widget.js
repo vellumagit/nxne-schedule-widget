@@ -27,6 +27,14 @@
   const HARDCODED_SHOWS = [
     // Jessie Reyez removed — pulled per request
     {
+      name: 'BLOND:ISH',
+      venue: 'HOTEL X',
+      date: 'Jun 13',
+      time: '4:00 PM',
+      tag: 'BILLBOARD CANADA THE STAGE',
+      genres: 'Electronic',
+    },
+    {
       name: 'Dan + Shay',
       venue: 'Opera House',
       date: 'Jun 14',
