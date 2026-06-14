@@ -38,7 +38,7 @@
       name: 'Dan + Shay',
       venue: 'Opera House',
       date: 'Jun 14',
-      time: '8:00 PM',
+      time: '7:00 PM',
       tag: 'BILLBOARD CANADA THE STAGE',
       genres: 'Country',
     },
